@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubbles love</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div id="start-screen">
+        <h1>¡Feliz Cumpleaños!</h1>
+        <button id="start-btn">Iniciar</button>
+    </div>
+    <div id="main-content" style="display:none;">
+        <div class="message">Feliz Cumpleaños Adrianita de mi Corazón </div>
+        <div id="bubbles-text"></div>
+        <audio id="bg-music" src="Mac DeMarco  My Kind Of Woman.mp3" preload="auto" loop></audio>
+    </div>
+    <script>
+        function createTextBubble() {
+            const bubble = document.createElement("div");
+            bubble.className = "text-bubble";
+            bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
+
+            const container = document.getElementById("bubbles-text");
+            container.appendChild(bubble);
+
+            // Espera a que el DOM renderice la burbuja para obtener su tamaño real
+            requestAnimationFrame(() => {
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+                const bubbleWidth = bubble.offsetWidth;
+                const bubbleHeight = bubble.offsetHeight;
+
+                // Calcula una posición aleatoria segura
+                const left = Math.random() * (containerWidth - bubbleWidth);
+                const top = Math.random() * (containerHeight - bubbleHeight);
+
+                bubble.style.left = `${Math.max(0, left)}px`;
+                bubble.style.top = `${Math.max(0, top)}px`;
+            });
+
+            // Elimina la burbuja después de 8 segundos
+            setTimeout(() => {
+                bubble.remove();
+            }, 8000);
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
